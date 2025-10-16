@@ -1,0 +1,7 @@
+{
+  "name": "AI Posing Assistant",
+  "description": "An AI-powered application to help users with photo poses. It can either provide guidance on recreating a pose from a sample image or suggest improvements for a given scene.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
