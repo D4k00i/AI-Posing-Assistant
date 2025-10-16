@@ -1,4 +1,4 @@
-import { GoogleGenAI, Modality } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 import { AppMode, ImageFile, Language, AIResponse, Concept } from '../types';
 
 if (!process.env.API_KEY) {
@@ -64,9 +64,6 @@ const generateRecreateAdvice = async ({ language, images }: Omit<GenerateParams,
     const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash-image',
         contents: { parts: [{ text: prompt }, ...imageParts] },
-        config: {
-            responseModalities: [Modality.IMAGE],
-        },
     });
 
     let textResponse = '';
@@ -102,9 +99,6 @@ const generateImproveConcepts = async ({ language, images }: Omit<GenerateParams
     const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash-image',
         contents: { parts: [{ text: prompt }, imagePart] },
-        config: {
-            responseModalities: [Modality.IMAGE],
-        },
     });
 
     let textContent = '';
