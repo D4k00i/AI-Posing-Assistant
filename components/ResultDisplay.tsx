@@ -1,4 +1,5 @@
 import React from 'react';
+import { DownloadIcon } from './icons';
 
 interface ResultDisplayProps {
   title: string;
@@ -26,6 +27,15 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ title, content, image, im
       </p>
     );
   });
+  
+  const handleDownload = (imageUrl: string, filename: string) => {
+    const link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="w-full mt-8 p-6 bg-gray-800 border border-gray-700 rounded-lg shadow-lg animate-fade-in">
@@ -36,7 +46,17 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ title, content, image, im
 
       {image && imageTitle && (
         <div className="mt-6 border-t border-gray-700 pt-6">
-          <h3 className="text-xl font-bold text-purple-300 mb-3">{imageTitle}</h3>
+           <div className="flex justify-between items-center mb-3">
+             <h3 className="text-xl font-bold text-purple-300">{imageTitle}</h3>
+             <button
+              onClick={() => handleDownload(image, 'guided-pose.png')}
+              title="Download Image"
+              className="p-2 rounded-full text-gray-300 bg-gray-700 hover:bg-purple-600 hover:text-white transition-colors"
+              aria-label="Download Image"
+            >
+              <DownloadIcon className="w-5 h-5" />
+            </button>
+           </div>
           <img src={image} alt={imageTitle} className="rounded-lg border border-gray-600 mx-auto max-w-full h-auto" />
         </div>
       )}
